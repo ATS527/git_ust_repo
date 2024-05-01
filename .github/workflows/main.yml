@@ -28,7 +28,9 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: "Set the value"
-      run: echo "action_state=yellow" >> $GITHUB_ENV
+      run: |
+        echo "action_state=yellow" >> $GITHUB_ENV
+        echo "${{ env.action_state }}"
     - name: "Build and test the database"
       run: |
         echo "from windows runner API"
