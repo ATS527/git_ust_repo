@@ -27,7 +27,7 @@ jobs:
   build-db:
     runs-on: windows-latest
     steps:
-      name: "Build and test the database"
+    - name: "Build and test the database"
       env:
           DB_HOST: "localhost"
           DB_USER: "root"
