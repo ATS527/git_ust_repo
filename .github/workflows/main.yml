@@ -8,7 +8,7 @@ on:
     branches:
       - main
 
-  workflow_dispatch:
+workflow_dispatch:
 
 jobs:
   build-app:
@@ -27,6 +27,7 @@ jobs:
   build-db:
     runs-on: windows-latest
     steps:
+      name: "Build and test the database"
       run: |
         echo "from windows runner API"
         echo "${{ env.DB_HOST }}"
