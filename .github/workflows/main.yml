@@ -27,7 +27,7 @@ jobs:
   build-db:
     runs-on: windows-latest
     steps:
-      - run: |
+    run: |
       echo "from windows runner API"
       echo ${{ env.DB_HOST }}
     env:
