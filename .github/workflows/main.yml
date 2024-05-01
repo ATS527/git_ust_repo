@@ -28,14 +28,15 @@ jobs:
     runs-on: windows-latest
     steps:
       name: "Build and test the database"
+      env:
+          DB_HOST: "localhost"
+          DB_USER: "root"
+          DB_PASS: "password"
       run: |
         echo "from windows runner API"
         echo "${{ env.DB_HOST }}"
       
-      env:
-        DB_HOST: "localhost"
-        DB_USER: "root"
-        DB_PASS: "password"
+      
 
   packaging:
     needs: [build-app, build-db]
