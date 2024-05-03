@@ -1,43 +1,24 @@
-name: A Basic Workflow
+name: Passing values to next step
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
-  workflow_dispatch:
+on: workflow_dispatch
 
 jobs:
-  build-app:
+  passing-values:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: setting the value using env variables
+        run: echo "variableName=variableValue" >> $GITHUB_ENV
 
-      - name: Run a one line script
-        run: echo "Hello, world!"
-
-      - name: Run a multi-line script
+      - name: creating variables
+        id: var_source_step
         run: |
-          echo "Add other actions to build",
-          echo "test, and deploy your project".
+          echo "Performing a random task"
+          echo "::set-output name=var1_name::techskool"
+          echo "::set-output name=var2_date::$(date + '%Y-%m-%d')"
 
-  build-db:
-    runs-on: windows-latest
-    steps:
-    - name: "Set the value"
-      run: |
-        echo "action_state=yellow" >> $GITHUB_ENV
-        
-    - name: "Build and test the database"
-      run: |
-        echo "from windows runner API"
-        echo "${{ env.action_state }}"
-
-  packaging:
-    needs: [build-app, build-db]
-    runs-on: macos-latest
-    steps:
-      - run: echo "from macos runner"
+      - name: using the variables
+        run: |
+          echo "Printing the values"
+          echo variableName: ${{ env.variableName}}
+          echo var1_name: ${{ steps.var_source_step.outputs.var1_name }}
+          echo var2_date: ${{ steps.var_source_step.outputs.var2_date }}
