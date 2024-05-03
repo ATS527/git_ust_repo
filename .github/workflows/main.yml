@@ -14,7 +14,7 @@ jobs:
         run: |
           echo "Performing a random task"
           echo "::set-output name=var1_name::techskool"
-          echo "::set-output name=var2_date::$(date + '%Y-%m-%d')"
+          echo "::set-output name=var2_date::$(date +'%Y-%m-%d-%H-%M-%S')"
 
       - name: using the variables
         run: |
